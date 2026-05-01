@@ -39,7 +39,7 @@ const menuItems = [
     href: '/fraksi',
     columns: [
       {
-        title: "Anggota Fraksi NasDem",
+        title: "Anggota Fraksi",
         links: [
           { name: 'H. Toto Marwoto, M.Pd.', href: '/fraksi/toto-marwoto' },
           { name: 'Endang Cahyadi', href: '/fraksi/endang-cahyadi' },
@@ -56,80 +56,108 @@ const menuItems = [
     ]
   },
   { name: 'Berita', href: '/berita' },
-  { name: 'Aspirasi', href: '/aspirasi' }, // Menu Utama Baru
+  { name: 'Aspirasi', href: '/aspirasi' },
 ];
 
 export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
-  // Fungsi untuk mencari data kolom berdasarkan menu yang aktif
   const activeMenuData = menuItems.find(item => item.name === activeMenu);
 
   return (
     <nav 
-      className="fixed top-0 w-full z-[99999] bg-[#005697] text-white shadow-2xl"
+      className="fixed top-0 w-full z-[99999] text-white"
       onMouseLeave={() => setActiveMenu(null)}
     >
-      {/* Baris Atas */}
-      <div className="max-w-7xl mx-auto px-6 h-24 flex justify-between items-center border-b border-white/10">
-        <Link href="/" className="flex items-center gap-5">
-          <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg overflow-hidden p-0"> 
-            <img src="/images/logo.png" alt="Logo" className="w-full h-full object-contain" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-[600] text-xl uppercase tracking-tight">DPD PARTAI NASDEM</span>
-            <span className="text-l mt-1">KABUPATEN CIAMIS</span>
-          </div>
-        </Link>
-        <button className="bg-[#FFCC00] text-[#005697] px-6 py-2 rounded-sm font-bold text-[11px] uppercase">
-          KTA DIGITAL
-        </button>
+      {/* Baris Atas: Logo & Branding */}
+      <div className="bg-[#001A2E] border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+          <Link href="/" className="flex items-center gap-4 group">
+            <div className="w-15 h-15 bg-white rounded-full flex items-center justify-center shadow-inner overflow-hidden border-2 border-[#FFCC00]/20 group-hover:border-[#FFCC00] transition-all duration-500"> 
+              <img 
+                src="/images/logo.png" 
+                alt="Logo" 
+                className="w-[120%] h-[120%] object-contain scale-120%" 
+              />
+            </div>
+            <div className="flex flex-col leading-tight">
+              <span className="font-medium text-lg tracking-wide">DPD PARTAI <span className="text-[#FFCC00]">NASDEM</span></span>
+              <span className="text-[11px] font-light tracking-[0.2em] text-slate-400">KABUPATEN CIAMIS</span>
+            </div>
+          </Link>
+          
+          <Link href="/kta" className="group flex items-center gap-3">
+             <div className="text-right hidden md:block">
+                <p className="text-[10px] font-light text-slate-400 uppercase tracking-widest">Gabung Partai</p>
+                <p className="text-xs font-normal">DAFTAR</p>
+             </div>
+             <div className="w-10 h-10 flex items-center justify-center rounded-xl bg-[#FFCC00] text-[#001A2E] group-hover:scale-110 transition-transform duration-300">
+                <Icon icon="lucide:user-plus" width="20" />
+             </div>
+          </Link>
+        </div>
       </div>
 
-      {/* Baris Bawah */}
-      <div className="bg-[#00457a] relative">
-        <div className="max-w-7xl mx-auto px-6 flex items-center">
+      {/* Baris Bawah: Navigasi Menu */}
+      <div className="bg-[#002a4a]/80 backdrop-blur-md relative border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-center">
           {menuItems.map((item) => (
             <div 
               key={item.name} 
               onMouseEnter={() => setActiveMenu(item.name)} 
-              className="static"
+              className="relative"
             >
               <Link 
                 href={item.href || "#"}
-                className={`block px-6 py-4 text-[12px] font-bold uppercase tracking-[0.2em] transition-all
-                  ${activeMenu === item.name ? 'bg-white text-[#005697]' : 'hover:bg-white/10 text-white'}`}
+                className={`block px-8 py-4 text-[11px] font-normal uppercase tracking-[0.25em] transition-all relative
+                  ${activeMenu === item.name ? 'text-[#FFCC00]' : 'hover:text-[#FFCC00]/70 text-slate-200'}`}
               >
                 {item.name}
+                {activeMenu === item.name && (
+                  <motion.div 
+                    layoutId="nav-underline"
+                    className="absolute bottom-0 left-0 w-full h-[2px] bg-[#FFCC00]"
+                  />
+                )}
               </Link>
             </div>
           ))}
         </div>
 
-        {/* Mega Menu (Otomatis muncul jika menu memiliki 'columns') */}
+        {/* Mega Menu Dropdown */}
         <AnimatePresence>
           {activeMenuData?.columns && (
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              className="absolute top-full left-0 w-full bg-white shadow-2xl border-b-4 border-[#FFCC00] text-[#005697]"
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="absolute top-full left-0 w-full bg-white text-[#001A2E] shadow-[0_20px_50px_rgba(0,0,0,0.2)]"
             >
-              <div className="max-w-7xl mx-auto px-8 py-12 grid grid-cols-4 gap-12">
+              <div className="max-w-7xl mx-auto px-10 py-10 grid grid-cols-3 gap-16">
                 {activeMenuData.columns.map((col) => (
-                  <div key={col.title} className="flex flex-col gap-4 border-l border-slate-100 pl-6">
-                    <h3 className="text-[10px] font-black text-slate-400 uppercase mb-2">{col.title}</h3>
-                    {col.links.map((link) => (
-                      <Link 
-                        key={link.name} 
-                        href={link.href} 
-                        className="text-sm font-bold hover:text-[#FFCC00] py-1 transition-colors"
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
+                  <div key={col.title} className="space-y-6">
+                    <h3 className="text-[10px] font-bold text-[#FFCC00] uppercase tracking-[0.3em] pb-2 border-b border-slate-100">
+                      {col.title}
+                    </h3>
+                    <div className="flex flex-col gap-3">
+                      {col.links.map((link) => (
+                        <Link 
+                          key={link.name} 
+                          href={link.href} 
+                          className="text-[13px] font-normal text-slate-600 hover:text-[#005697] hover:translate-x-1 transition-all flex items-center gap-2 group"
+                        >
+                          <div className="w-1 h-1 bg-slate-300 rounded-full group-hover:bg-[#FFCC00] transition-colors" />
+                          {link.name}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 ))}
+              </div>
+              {/* Footer kecil di dalam mega menu untuk kesan detail */}
+              <div className="bg-slate-50 py-3 px-10 text-center">
+                 <p className="text-[9px] text-slate-400 tracking-widest font-light">RESTORASI INDONESIA - GERAKAN PERUBAHAN</p>
               </div>
             </motion.div>
           )}
