@@ -7,16 +7,6 @@ import Footer from "@/components/sections/Footer";
 
 // Data Pengurus Terstruktur
 const hierarchy = {
-  dpw: [
-    {
-      id: 1,
-      name: "Drs. MAMAT RACHMAT, M.Si.",
-      role: "Ketua DPW Jawa Barat",
-      img: "/images/06.png",
-      visi: "Mewujudkan restorasi Jawa Barat yang progresif.",
-      misi: ["Penguatan struktur wilayah", "Sinergi DPD se-Jawa Barat"]
-    }
-  ],
   ketuaDpd: [
     {
       id: 2,
@@ -108,12 +98,6 @@ export default function StrukturPage() {
       </section>
 
       <section className="max-w-7xl mx-auto px-6 pb-32 space-y-24">
-        
-        {/* Level 1: Ketua DPW */}
-        <div className="text-center space-y-8">
-          <MemberCard member={hierarchy.dpw[0]} isLarge />
-          <div className="h-12 w-px bg-gradient-to-b from-[#FFCC00] to-transparent mx-auto opacity-30" />
-        </div>
 
         {/* Level 2: Ketua DPD */}
         <div className="text-center space-y-8">
