@@ -29,7 +29,7 @@ const hierarchy = {
     { id: 10, name: "TAUFIQ IHSANI, M.Pd", role: "Wakil Ketua Bidang Digital dan Siber", img: "/images/default.png", visi: "-", misi: [] },
     { id: 11, name: "AGUS SAEFUL UJAB", role: "Wakil Ketua Bidang Media dan Komunikasi Publik", img: "/images/default.png", visi: "-", misi: [] },
     { id: 12, name: "PIPIT SUSANTI", role: "Wakil Ketua Bidang Ekonomi", img: "/images/default.png", visi: "-", misi: [] },
-    { id: 13, name: "YANI APRIANI", role: "Wakil Ketua Bidang Usaha Mikro Kecil dan Menengah", img: "/images/default.png", visi: "-", misi: [] },
+    { id: 13, name: "YENI HERDIANI LESTARI", role: "Wakil Ketua Bidang Usaha Mikro Kecil dan Menengah", img: "/images/default.png", visi: "-", misi: [] },
     { id: 14, name: "JAJANG HENDARUSMAN, S.Pd.I", role: "Wakil Ketua Bidang Agama dan Masyarakat Adat", img: "/images/default.png", visi: "-", misi: [] },
     { id: 15, name: "DEWI YULIANTI, S.Pd", role: "Wakil Ketua Bidang Tenaga Kerja", img: "/images/default.png", visi: "-", misi: [] },
     { id: 16, name: "TITA YUNIARTI", role: "Wakil Ketua Bidang Kesehatan", img: "/images/default.png", visi: "-", misi: [] },
