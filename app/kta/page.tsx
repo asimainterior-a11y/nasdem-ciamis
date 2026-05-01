@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/sections/Footer";
+import { client } from "@/sanity/lib/sanity";
 
 function KtaPage() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     nama: "",
     nik: "",
@@ -21,11 +23,34 @@ function KtaPage() {
     kesediaan: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulasi pengiriman data
-    setIsSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsSubmitting(true);
+
+    try {
+      // Data yang dikirim harus sesuai dengan name di schemaTypes/kta.ts
+      const doc = {
+        _type: "kta",
+        nama: formData.nama,
+        nik: formData.nik,
+        whatsapp: formData.whatsapp,
+        email: formData.email,
+        alamat: formData.alamat,
+        pekerjaan: formData.pekerjaan,
+        pendidikan: formData.pendidikan,
+        // Status verifikasi akan otomatis 'pending' sesuai initialValue di skema
+      };
+
+      await client.create(doc);
+      
+      setIsSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+      console.error("Gagal mengirim ke Sanity:", error);
+      alert("Terjadi kesalahan teknis. Silakan periksa koneksi atau coba lagi nanti.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -33,6 +58,7 @@ function KtaPage() {
       <Navbar />
 
       <section className="pt-40 pb-24 px-6 relative">
+        {/* Background Glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-600/10 via-transparent to-transparent -z-10" />
 
         <div className="max-w-3xl mx-auto">
@@ -86,7 +112,8 @@ function KtaPage() {
                     <label className="text-[10px] uppercase font-bold tracking-widest text-slate-500 ml-1">No. NIK (KTP)</label>
                     <input 
                       required
-                      type="number"
+                      type="text"
+                      maxLength={16}
                       placeholder="16 Digit Angka"
                       className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 focus:outline-none focus:border-[#FFCC00]/50 transition-all"
                       onChange={(e) => setFormData({...formData, nik: e.target.value})}
@@ -210,10 +237,11 @@ function KtaPage() {
                   </p>
                   <button 
                     type="submit"
-                    className="w-full bg-[#FFCC00] hover:bg-[#e6b800] text-[#001A2E] font-black py-5 rounded-2xl shadow-[0_10px_30px_rgba(255,204,0,0.2)] transition-all flex items-center justify-center gap-3 group"
+                    disabled={isSubmitting}
+                    className={`w-full ${isSubmitting ? 'bg-slate-700 cursor-not-allowed' : 'bg-[#FFCC00] hover:bg-[#e6b800]'} text-[#001A2E] font-black py-5 rounded-2xl shadow-[0_10px_30px_rgba(255,204,0,0.2)] transition-all flex items-center justify-center gap-3 group`}
                   >
-                    KIRIM PENDAFTARAN
-                    <Icon icon="lucide:arrow-right" className="group-hover:translate-x-2 transition-transform" />
+                    {isSubmitting ? "SEDANG MENGIRIM..." : "KIRIM PENDAFTARAN"}
+                    {!isSubmitting && <Icon icon="lucide:arrow-right" className="group-hover:translate-x-2 transition-transform" />}
                   </button>
                 </div>
               </form>
