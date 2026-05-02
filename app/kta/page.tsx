@@ -23,31 +23,39 @@ function KtaPage() {
     kesediaan: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+ const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // Data yang dikirim harus sesuai dengan name di schemaTypes/kta.ts
-      const doc = {
-        _type: "kta",
-        nama: formData.nama,
-        nik: formData.nik,
-        whatsapp: formData.whatsapp,
-        email: formData.email,
-        alamat: formData.alamat,
-        pekerjaan: formData.pekerjaan,
-        pendidikan: formData.pendidikan,
-        // Status verifikasi akan otomatis 'pending' sesuai initialValue di skema
-      };
+      // MENGIRIM KE API ROUTE (SERVER-SIDE) BUKAN LANGSUNG KE SANITY
+      const response = await fetch('/api/kta', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nama: formData.nama,
+          nik: formData.nik,
+          whatsapp: formData.whatsapp,
+          email: formData.email,
+          alamat: formData.alamat,
+          pekerjaan: formData.pekerjaan,
+          pendidikan: formData.pendidikan,
+          // Tambahkan field lain jika Route Handler kamu mendukungnya
+        }),
+      });
 
-      await client.create(doc);
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Gagal mendaftar');
+      }
       
       setIsSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (error) {
-      console.error("Gagal mengirim ke Sanity:", error);
-      alert("Terjadi kesalahan teknis. Silakan periksa koneksi atau coba lagi nanti.");
+    } catch (error: any) {
+      console.error("Error pendaftaran:", error);
+      alert(error.message || "Terjadi kesalahan teknis. Silakan coba lagi nanti.");
     } finally {
       setIsSubmitting(false);
     }
