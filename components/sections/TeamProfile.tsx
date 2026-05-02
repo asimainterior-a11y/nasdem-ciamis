@@ -32,7 +32,7 @@ const allMembers = [
 
 export default function TeamProfile() {
   return (
-    <section className="py-24 bg-[#001A2E] text-white overflow-hidden">
+    <section className="py-24 bg-[#19367F] text-white overflow-hidden">
       <div className="container mx-auto px-6">
         {/* Header Section */}
         <div className="text-center mb-16">

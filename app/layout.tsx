@@ -17,15 +17,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="id" className="scroll-smooth">
-      {/* 1. Body dikunci ke Navy */}
-      <body className={`${jakarta.variable} font-sans bg-[#001A2E] min-h-screen`}>
+      {/* Menggunakan biru yang lebih sesuai dengan logo */}
+      <body className={`${jakarta.variable} font-sans bg-[#19367F] min-h-screen text-white`}>
         <Navbar />
         
-        {/* 
-          2. MASALAH UTAMA: Ganti bg-white menjadi bg-[#001A2E] 
-          Juga hapus shadow-2xl agar tidak ada garis abu-abu di pinggir layar monitor besar
-        */}
-        <main className="max-w-[1440px] mx-auto bg-[#001A2E] min-h-screen relative">
+        {/* Main container tanpa shadow agar seamless di layar besar */}
+        <main className="max-w-[1440px] mx-auto bg-[#19367F] min-h-screen relative">
           {children}
         </main>
       </body>

@@ -27,7 +27,7 @@ const missions = [
 
 export default function VisiMisi() {
   return (
-    <section className="relative py-24 bg-[#001A2E] overflow-hidden">
+    <section className="relative py-24 bg-[#19367F] overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FFCC00]/5 blur-[150px] rounded-full"></div>
       

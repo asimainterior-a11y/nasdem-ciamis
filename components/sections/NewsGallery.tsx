@@ -13,7 +13,7 @@ const news = [
 export default function NewsGallery() {
   return (
     <section 
-      className="relative z-50 bg-[#001A2E] w-full"
+      className="relative z-50 bg-[#19367F] w-full"
       style={{ marginTop: "-2px" }} // Memastikan tidak ada celah putih sehelai rambut pun
     >
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 lg:px-20 py-16">

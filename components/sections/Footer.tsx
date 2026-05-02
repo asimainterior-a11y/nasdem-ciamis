@@ -27,14 +27,14 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-[#001A2E] text-white overflow-hidden">
+    <footer className="bg-[#19367F] text-white overflow-hidden">
       {/* 1. CONTRASTING BANNER: Sebagai pembatas yang elegan dan eye-catching */}
       <div className="bg-[#FFCC00] py-4 overflow-hidden relative">
         <div className="flex whitespace-nowrap animate-marquee items-center">
           {[...Array(10)].map((_, i) => (
             <span key={i} className="text-[#001A2E] font-light uppercase tracking-[0.5em] text-[10px] mx-8 flex items-center gap-4">
-              Restorasi Indonesia <div className="w-1 h-1 bg-[#001A2E] rounded-full" />
-              DPD NasDem Ciamis <div className="w-1 h-1 bg-[#001A2E] rounded-full" />
+              Restorasi Indonesia <div className="w-1 h-1 bg-[#19367F] rounded-full" />
+              DPD NasDem Ciamis <div className="w-1 h-1 bg-[#19367F] rounded-full" />
             </span>
           ))}
         </div>

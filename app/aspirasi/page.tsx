@@ -28,7 +28,7 @@ export default function AspirasiPage() {
   const prevStep = () => setStep(step - 1);
 
   return (
-    <main className="min-h-screen bg-[#001A2E] text-white">
+    <main className="min-h-screen bg-[#19367F] text-white">
       <Navbar />
 
       {/* HEADER SECTION */}
@@ -95,7 +95,7 @@ export default function AspirasiPage() {
                     </div>
                     <div className="space-y-2">
                       <label className="text-[10px] uppercase tracking-widest text-slate-500">Kecamatan Domisili</label>
-                      <select className="w-full bg-[#001A2E] border border-white/10 rounded-xl px-5 py-4 focus:border-[#FFCC00] outline-none transition-all font-extralight text-slate-400">
+                      <select className="w-full bg-[#19367F] border border-white/10 rounded-xl px-5 py-4 focus:border-[#FFCC00] outline-none transition-all font-extralight text-slate-400">
                         <option>Pilih Kecamatan</option>
                         <option>Ciamis</option>
                         <option>Kawali</option>

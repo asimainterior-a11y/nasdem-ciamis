@@ -55,7 +55,7 @@ export default function Hero() {
     <section 
       ref={container} 
       // Menggunakan h-[90vh] untuk memberi ruang bernapas yang lega
-      className="relative w-full h-[80vh] lg:h-[90vh] flex items-center overflow-hidden bg-[#001A2E]"
+      className="relative w-full h-[80vh] lg:h-[90vh] flex items-center overflow-hidden bg-[#19367F]"
     >
       {/* WRAPPER FOTO: Padding diperbesar menjadi lg:p-16 atau lg:p-20 */}
       <div className="absolute inset-0 z-0 p-6 md:p-12 lg:p-20">
